@@ -1,0 +1,132 @@
+if game.CoreGui:FindFirstChild("Glympse") then
+	game:GetService("CoreGui")["Glympse"]:Destroy()
+end
+wait()
+
+local r = {}
+function r:LoadLibrary()
+	local Glympse = Instance.new("ScreenGui")
+	local Main = Instance.new("Frame")
+	local Tabs = Instance.new("Frame")
+	local Title = Instance.new("TextLabel")
+	local Frames = Instance.new("Frame")
+	local UIListLayout = Instance.new("UIListLayout")
+	
+	game:GetService("UserInputService").InputBegan:Connect(function(key)
+		if key.KeyCode == Enum.KeyCode.LeftControl then
+			if Main.Visible == true then
+				Main.Visible = false
+			else
+				Main.Visible = true
+			end
+		end
+	end)
+	
+	Glympse.Name = "Glympse"
+	Glympse.Parent = game.CoreGui
+	
+	Main.Name = "Main"
+	Main.Parent = Glympse
+	Main.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
+	Main.BorderSizePixel = 0
+	Main.Position = UDim2.new(0.170570999, 0, 0.147561952, 0)
+	Main.Size = UDim2.new(0, 899, 0, 540)
+	Main.Active = true
+	Main.Draggable = true
+	
+	Tabs.Name = "Tabs"
+	Tabs.Parent = Main
+	Tabs.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+	Tabs.BorderSizePixel = 0
+	Tabs.Position = UDim2.new(0.0244675614, 0, 0.105440326, 0)
+	Tabs.Size = UDim2.new(0, 170, 0, 460)
+	
+	UIListLayout.Parent = Tabs
+	UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+	
+	Title.Name = "Title"
+	Title.Parent = Main
+	Title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Title.BackgroundTransparency = 1.000
+	Title.BorderSizePixel = 0
+	Title.Position = UDim2.new(0.0233592875, 0, 0.027777778, 0)
+	Title.Size = UDim2.new(0, 857, 0, 31)
+	Title.Font = Enum.Font.SourceSans
+	Title.Text = "Glympse hub"
+	Title.TextColor3 = Color3.fromRGB(255, 255, 255)
+	Title.TextScaled = true
+	Title.TextSize = 14.000
+	Title.TextWrapped = true
+	
+	Frames.Name = "Frames"
+	Frames.Parent = Main
+	Frames.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Frames.BackgroundTransparency = 1.000
+	Frames.Position = UDim2.new(0.224694103, 0, 0.105555557, 0)
+	Frames.Size = UDim2.new(0, 676, 0, 459)
+	
+	
+	local r2 = {}
+	function r2:AddTab(text)
+		local Tab1 = Instance.new("TextButton")
+		local ScrollingFrame = Instance.new("ScrollingFrame")
+		local UIListLayout_2 = Instance.new("UIListLayout")
+		
+		Tab1.Name = text.."Tab"
+		Tab1.Parent = Tabs
+		Tab1.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+		Tab1.BorderSizePixel = 0
+		Tab1.Size = UDim2.new(0, 170, 0, 41)
+		Tab1.Font = Enum.Font.SourceSans
+		Tab1.Text = text
+		Tab1.TextColor3 = Color3.fromRGB(255, 255, 255)
+		Tab1.TextScaled = true
+		Tab1.TextSize = 14.000
+		Tab1.TextWrapped = true
+		Tab1.MouseButton1Click:Connect(function()
+			for i, v in next, Frames:GetChildren() do
+				v.Visible = false
+			end
+			ScrollingFrame.Visible = true
+		end)
+		
+		ScrollingFrame.Parent = Frames
+		ScrollingFrame.Active = true
+		ScrollingFrame.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+		ScrollingFrame.BorderSizePixel = 0
+		ScrollingFrame.Position = UDim2.new(-0.00015796721, 0, 0.000980392098, 0)
+		ScrollingFrame.Size = UDim2.new(0, 676, 0, 459)
+		ScrollingFrame.CanvasSize = UDim2.new(0, 0, 10, 0)
+		ScrollingFrame.ScrollBarThickness = 0
+		
+		UIListLayout_2.Parent = ScrollingFrame
+		UIListLayout_2.SortOrder = Enum.SortOrder.LayoutOrder
+		
+		local r3 = {}
+		function r3:AddButton(text2, callback)
+			
+			local callback = callback or function()
+			end
+			
+			local Button1 = Instance.new("TextButton")
+			
+			Button1.Name = text2.."Buton"
+			Button1.Parent = ScrollingFrame
+			Button1.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+			Button1.BorderSizePixel = 0
+			Button1.Size = UDim2.new(0, 676, 0, 41)
+			Button1.Font = Enum.Font.SourceSans
+			Button1.Text = text2
+			Button1.TextColor3 = Color3.fromRGB(255, 255, 255)
+			Button1.TextScaled = true
+			Button1.TextSize = 14.000
+			Button1.TextWrapped = true
+			Button1.MouseButton1Click:Connect(function()
+				pcall(callback)
+			end)
+		end
+		return r3
+	end
+	return r2
+end
+return r
